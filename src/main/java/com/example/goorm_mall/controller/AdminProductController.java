@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -32,8 +33,26 @@ public class AdminProductController {
     }
 	
 	@PostMapping("/add")
-    public String addSnack(@ModelAttribute Product product) {
+    public String addProduct(@ModelAttribute Product product) {
         productService.addProduct(product.getName(), product.getDescription(), product.getPrice(), product.getQuantity());
         return "redirect:/admin/products";
     }
+	
+	@GetMapping("/edit/{id}")
+	public String editProductForm(@PathVariable Long id, Model model) {
+		model.addAttribute("product", productService.getProductById(id));
+		return "admin/product/form";
+	}
+	
+	@PostMapping("/edit/{id}")
+	public String updateProduct(@PathVariable Long id, @ModelAttribute Product product) {
+		productService.updateProduct(id, product.getName(), product.getDescription(), product.getPrice(), product.getQuantity());
+		return "redirect:/admin/products";
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String deleteProduct(@PathVariable Long id) {
+		productService.deleteProduct(id);
+		return "redirect:/admin/products";
+	}
 }

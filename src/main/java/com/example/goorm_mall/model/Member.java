@@ -13,8 +13,13 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	// 회원 로그인 id를 대신한다.
 	@Column(nullable = false, length = 50)
     private String username;
+	
+	// 회원의 실제 이름
+	@Column(nullable = false, length = 50)
+    private String name;
 
     @Column(nullable = false, length = 255)
     private String password;

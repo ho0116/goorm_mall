@@ -19,6 +19,10 @@
             <label for="price">가격:</label>
             <input type="number" id="price" th:field="*{price}" required>
         </div>
+        <div>
+            <label for="quantity">재고:</label>
+            <input type="number" id="quantity" th:field="*{quantity}" required>
+        </div>
         <button type="submit" th:text="${product.id} ? '수정' : '추가'"></button>
     </form>
     <a th:href="@{/admin/products}">상품 목록</a>
