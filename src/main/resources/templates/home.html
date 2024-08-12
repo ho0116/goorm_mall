@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>구름이네 간식창고</title>
+</head>
+<body>
+    <h1>간식 창고에 어서오세요!</h1>
+    <div th:if="${username == null}">
+        <a th:href="@{/login}">로그인</a> | 
+        <a th:href="@{/join}">가입</a>
+    </div>
+    <div th:if="${username != null}">
+        <p>반가워요, <span th:text="${username}"></span>님!</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+    <div>
+        <a th:href="@{/products}">간식 보기</a>
+    </div>
+    <div th:if="${isAdmin}">
+        <a th:href="@{/admin/products}">간식 관리</a>
+    </div>
+</body>
+</html>
