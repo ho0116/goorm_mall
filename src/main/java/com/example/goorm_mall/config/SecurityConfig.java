@@ -1,7 +1,6 @@
 package com.example.goorm_mall.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,23 +14,24 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(
-        		req -> req
-        		.requestMatchers("/", "/home", "/join").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .formLogin(
-            	form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
-    		)
-            .logout(
-            	logout -> logout
-            	.logoutUrl("/logout")
-            	.permitAll()
-            );
+                .authorizeHttpRequests(
+                        req -> req
+                                .requestMatchers("/", "/home", "/join").permitAll()
+                                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
+                .formLogin(
+                        form -> form
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/")
+                                .permitAll()
+                )
+                .logout(
+                        logout -> logout
+                                .logoutUrl("/logout")
+                                .permitAll()
+                );
         return http.build();
     }
 
