@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.goorm_mall.model.Member;
 import com.example.goorm_mall.model.Product;
+import com.example.goorm_mall.model.ProductLike;
+import com.example.goorm_mall.repository.MemberRepository;
+import com.example.goorm_mall.repository.ProductLikeRepository;
 import com.example.goorm_mall.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -13,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService {
 	private final ProductRepository productRepository;
+	private final MemberRepository memberRepository;
+	private final ProductLikeRepository likeRepository;
 	
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
@@ -28,6 +34,7 @@ public class ProductService {
 		product.setDescription(description);
 		product.setPrice(price);
 		product.setQuantity(quantity);
+		product.setViewCount(0);
 		return productRepository.save(product);
 	}
 	
@@ -42,5 +49,32 @@ public class ProductService {
 	
 	public void deleteProduct(Long id) {
 		productRepository.deleteById(id);
+	}
+	
+	public Product updateViewCount(Long id) {
+		Product product = getProductById(id);
+		product.setViewCount(product.getViewCount() + 1);
+		return productRepository.save(product);
+	}
+	
+	public void addLike(Long ProductId, String username) {
+		Product product = getProductById(ProductId);
+		Member member = memberRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+
+		if (likeRepository.findByProductAndMember(product, member).isEmpty()) {
+			ProductLike productLike = new ProductLike();
+			productLike.setProduct(product);;
+			productLike.setMember(member);
+			likeRepository.save(productLike);
+		}
+	}
+	
+	public void removeLike(Long productId, String username) {
+		Product product = getProductById(productId);
+		Member member = memberRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+
+		likeRepository.findByProductAndMember(product, member).ifPresent(likeRepository::delete);
 	}
 }

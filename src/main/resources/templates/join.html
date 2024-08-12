@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>가입</title>
+<title>가입</title>
+
 </head>
+<script>
+	function validatePassword() {
+		var password = document.getElementById("password").value;
+		var confirmPassword = document.getElementById("rePassword").value;
+		var message = document.getElementById("passwordMessage");
+
+		if (password !== confirmPassword) {
+			message.style.color = 'red';
+			message.innerHTML = '입력한 값이 일치하지 않습니다.';
+		} else {
+			message.style.color = 'green';
+			message.innerHTML = '입력한 값이 일치합니다.';
+		}
+
+		if (password == "" || confirmPassword == "") {
+			message.style.color = '';
+			message.innerHTML = '';
+		}
+	}
+</script>
 <body>
-    <h1>가입</h1>
-    <form th:action="@{/join}" method="post">
-        <div>
-            <label for="username">ID:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="password">PW:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <label for="rePassword">RePW:</label>
-            <input type="password" placeholder="Re-enter password" id="rePassword" name="rePassword" required>
-        </div>
-        <div>
-            <input type="submit" value="Join">
-        </div>
-    </form>
-    <div>
-        <a th:href="@{/login}">이미 가입하셨나요? 로그인하러 가기</a>
-    </div>
+	<h1>가입</h1>
+	<form th:action="@{/join}" method="post">
+		<div>
+			<label for="username">ID:</label> <input type="text" id="username"
+				name="username" required>
+		</div>
+		<div>
+			<label for="email">Email:</label> <input type="email" id="email"
+				name="email" required>
+		</div>
+		<div>
+			<label for="password">PW:</label> <input type="password"
+				id="password" name="password" required onkeyup="validatePassword();">
+		</div>
+		<div>
+			<label for="rePassword">RePW:</label> <input type="password"
+				placeholder="Re-enter password" id="rePassword" name="rePassword"
+				required onkeyup="validatePassword();">
+		</div>
+		<div id="passwordMessage" style="font-size: 14px; margin-top: 10px;"></div>
+		<div>
+			<input type="submit" value="Join">
+		</div>
+	</form>
+	<div>
+		<a th:href="@{/login}">이미 가입하셨나요? 로그인하러 가기</a>
+	</div>
 </body>
 </html>
