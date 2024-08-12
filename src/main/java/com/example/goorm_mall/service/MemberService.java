@@ -19,11 +19,15 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(String username, String email, String password) {
+    public void join(String username, String email, String password, String rePassword) {
         if (memberRepository.existsByUsername(username)) {
+            System.out.println("이미 존재하는 회원입니다.");
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
-
+        else if (!password.equals(rePassword)) {
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            throw new IllegalStateException("비밀번호가 일치하지 않습니다.");
+        }
         Member member = new Member();
         member.setUsername(username);
         member.setEmail(email);

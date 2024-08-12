@@ -20,9 +20,9 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
+    public String join(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String rePassword) {
         try {
-            memberService.join(username, email, password);
+            memberService.join(username, email, password, rePassword);
             return "redirect:/login";
         } catch (IllegalStateException e) {
             return "redirect:/join?error";
