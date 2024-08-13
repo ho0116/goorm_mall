@@ -4,27 +4,29 @@
     <title>좋아요한 상품</title>
 </head>
 <body>
-    <h1>좋아요한 상품</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>상품명</th>
-                <th>상품 설명</th>
-                <th>가격</th>
-                <th>좋아요 수</th>
-                <th>기능</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="product : ${likedProducts}">
-                <td th:text="${product.name}"></td>
-                <td th:text="${product.description}"></td>
-                <td th:text="${product.price}"></td>
-                <td th:text="${totalLikes}"></td>
-                <td><a th:href="@{/products/{id}(id=${product.id})}">자세히 보기</a></td>
-            </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/products}">간식 목록</a>
+    <div class="container">
+    	<h1>좋아요한 상품</h1>
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>상품명</th>
+	                <th>상품 설명</th>
+	                <th>가격</th>
+	                <th>좋아요 수</th>
+	                <th>기능</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="product : ${likedProducts}">
+	                <td th:text="${product.name}"></td>
+	                <td th:text="${product.description}"></td>
+	                <td th:text="${product.price}"></td>
+	                <td th:text="${totalLikes}"></td>
+	                <td><a th:href="@{/products/{id}(id=${product.id})}">자세히 보기</a></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    <a th:href="@{/products}">간식 목록</a>
+    </div>
 </body>
 </html>

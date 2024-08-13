@@ -1,6 +1,5 @@
 package com.example.goorm_mall.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;

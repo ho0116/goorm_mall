@@ -8,7 +8,7 @@ body, h1, form, div, input, label, a {
 }
 
 /* Body styling */
-body {
+.container {
     background-color: #f9f9f9;
     display: flex;
     justify-content: center;

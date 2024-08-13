@@ -6,9 +6,11 @@
 </head>
 <body>
 <header th:include="/fragments/header :: headerFragment"></header>
-<h1>Goorm Mall</h1>
-<div th:if="${username != null}">
-    <p>반가워요, <span th:text="${username}"></span>님!</p>
+<div class="container">
+	<h1>Goorm Mall</h1>
+	<div th:if="${username != null}">
+	    <p>반가워요, <span th:text="${username}"></span>님!</p>
+	</div>
 </div>
 </body>
 </html>
