@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.goorm_mall.model.Member;
 import com.example.goorm_mall.model.Product;
@@ -42,6 +43,8 @@ public class ProductController {
         		.map(Member::getUsername)
         		.anyMatch((el) -> el.equals(authentication.getName()));
         model.addAttribute("isLiked", isLiked);
+        Long totalLikes = productService.countLikesByProductId(id);
+        model.addAttribute("totalLikes", totalLikes);
 		return "product/view";
 	}
 	
@@ -55,5 +58,22 @@ public class ProductController {
 	public String removeLike(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails) {
 		productService.removeLike(id, userDetails.getUsername());
 		return "redirect:/products/" + id;
+	}
+	
+	@PostMapping("/{id}/comment")
+	public String addComment(@PathVariable Long id, @RequestParam String content,
+			@AuthenticationPrincipal UserDetails userDetails) {
+		productService.addComment(id, userDetails.getUsername(), content);
+		
+		return "redirect:/products/" + id;
+	}
+	
+	@GetMapping("/liked")
+	public String likedProducts(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+		List<Product> likedProducts = productService.getLikedProductsByUsername(userDetails.getUsername());
+		model.addAttribute("likedProducts", likedProducts);
+		Long totalLikes = productService.countLikesByProductId(likedProducts.get(0).getId());
+        model.addAttribute("totalLikes", totalLikes);
+		return "product/liked";
 	}
 }
