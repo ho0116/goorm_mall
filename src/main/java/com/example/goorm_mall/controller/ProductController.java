@@ -8,9 +8,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import com.example.goorm_mall.model.*;
+
 import com.example.goorm_mall.service.ProductService;
 
 @Controller
@@ -51,4 +53,5 @@ public class ProductController {
         productService.removeLike(id, userDetails.getUsername());
         return "redirect:/products/" + id;
     }
+
 }

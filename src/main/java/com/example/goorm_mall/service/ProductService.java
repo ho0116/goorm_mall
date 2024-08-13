@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.goorm_mall.model.Member;
 import com.example.goorm_mall.model.Product;
+import com.example.goorm_mall.model.ProductComment;
 import com.example.goorm_mall.model.ProductLike;
 import com.example.goorm_mall.repository.MemberRepository;
+import com.example.goorm_mall.repository.ProductCommentRepository;
 import com.example.goorm_mall.repository.ProductLikeRepository;
 import com.example.goorm_mall.repository.ProductRepository;
 
@@ -19,6 +21,7 @@ public class ProductService {
 	private final ProductRepository productRepository;
 	private final MemberRepository memberRepository;
 	private final ProductLikeRepository likeRepository;
+	private final ProductCommentRepository commentRepository;
 	
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
@@ -76,5 +79,30 @@ public class ProductService {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
 
 		likeRepository.findByProductAndMember(product, member).ifPresent(likeRepository::delete);
+	}
+	
+	public Long countLikesByProductId(Long productId) {
+		return likeRepository.countByProductId(productId);
+	}
+	
+	public List<ProductComment> getCommentsByProductId(Long productId) {
+		return commentRepository.getCommentsByProductId(productId);
+	}
+	
+	public void addComment(Long productId, String username, String content) {
+		Product product = getProductById(productId);
+		Member member = memberRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+		ProductComment comment = new ProductComment();
+		comment.setProduct(product);
+		comment.setMember(member);
+		comment.setContent(content);
+		commentRepository.save(comment);
+	}
+	
+	public List<Product> getLikedProductsByUsername(String username) {
+		Member member = memberRepository.findByUsername(username)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+		return likeRepository.findProductsByMember(member);
 	}
 }
