@@ -105,4 +105,17 @@ public class ProductService {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
 		return likeRepository.findProductsByMember(member);
 	}
+	
+	public void reduceQuantity(Long productId, int quantity) {
+		Product product = productRepository.findById(productId).get();
+		int updateQuantity = product.getQuantity() - quantity;
+		
+		if (updateQuantity < 0) {
+			throw new RuntimeException("재고가 충분하지 않습니다.");
+		}
+		
+		product.setQuantity(updateQuantity);
+		productRepository.save(product);
+		
+	}
 }

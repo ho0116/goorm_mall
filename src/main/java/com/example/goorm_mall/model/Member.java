@@ -32,4 +32,7 @@ public class Member {
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders;
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Payment> payments;
 }
