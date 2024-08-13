@@ -1,0 +1,45 @@
+/* header.css */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+body{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+nav {
+    display: flex;
+    margin-top: 3px;
+    justify-content: center; /* 가로로 중앙 정렬 */
+    align-items: center; /* 세로축 중앙 정렬 */
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    margin: 0 15px; /* 링크 사이에 간격 추가 */
+    color: #333;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+}
+
+a:hover{
+    color: #555;
+    text-decoration: none;
+}
+
+nav form {
+    display: inline-block;
+    margin-left: 15px;
+}
