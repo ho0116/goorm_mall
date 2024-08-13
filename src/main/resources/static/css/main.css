@@ -1,0 +1,31 @@
+body, h1, form, div, input, label, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.container {
+    margin-top: 5%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+table {
+    margin: 0 auto;
+}
+
+p{
+    text-align: center;
+}
+
+a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
