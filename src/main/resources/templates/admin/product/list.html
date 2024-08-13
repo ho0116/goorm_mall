@@ -2,24 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>관리자 - 상품 리스트</title>
-    <style>
-    	table {
-    		border-collapse: collapse;
-    		border-spacing: 0;
-    	}
-    	th, td {
-    		padding: 4px 6px;
-    		border: 1px solid #ccc;
-    	}
-    	form {
-    		display: inline-block;
-    	}
-    </style>
+	<link th:href="@{/css/header.css}" rel="stylesheet">
+	<link th:href="@{/css/admin.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+<header th:include="/fragments/header :: headerFragment"></header>
     <div class="container">
+		<div>
     	<h1>관리자 - 상품 리스트</h1>
-	    <a th:href="@{/admin/products/add}">새로운 상품 추가</a>
 	    <table>
 	        <thead>
 	            <tr>
@@ -27,7 +18,7 @@
 	                <th>상품 설명</th>
 	                <th>가격</th>
 	                <th>수량</th>
-	                <th>재고</th>
+					<th>재고</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -36,16 +27,18 @@
 	                <td th:text="${product.description}"></td>
 	                <td th:text="${product.price}"></td>
 	                <td th:text="${product.quantity}"></td>
-	                <td>
-	                    <a th:href="@{/admin/products/edit/{id}(id=${product.id})}">수정</a>
-	                    <form th:action="@{/admin/products/delete/{id}(id=${product.id})}" method="post">
-	                        <button type="submit">삭제</button>
-	                    </form>
-	                </td>
+					<td class="button-group">
+						<form th:action="@{/admin/products/edit/{id}(id=${product.id})}" method="get">
+							<button  type="submit">수정</button>
+						</form>
+						<form th:action="@{/admin/products/delete/{id}(id=${product.id})}" method="post">
+							<button type="submit">삭제</button>
+						</form>
+					</td>
 	            </tr>
 	        </tbody>
 	    </table>
-	    <a th:href="@{/}">홈으로</a>
+		</div>
     </div>
 </body>
 </html>
