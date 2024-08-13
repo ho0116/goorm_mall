@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>상품 리스트</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
 </head>
 <body>
+<header th:include="/fragments/header :: headerFragment"></header>
     <h1>상품 리스트</h1>
     <table>
         <thead>
@@ -24,6 +26,5 @@
         </tbody>
     </table>
     <a th:href="@{/products/liked}">좋아요한 상품 보기</a>
-    <a th:href="@{/}">홈으로 가기</a>
 </body>
 </html>

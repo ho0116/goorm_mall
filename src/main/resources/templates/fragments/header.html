@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Header</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="headerFragment">
+    <nav>
+        <div>
+            <a th:href="@{/}">Home</a>
+        </div>
+        <div th:if="${username == null}">
+            <a th:href="@{/login}">로그인</a>
+            <a th:href="@{/join}">가입</a>
+        </div>
+        <div th:if="${isAdmin}">
+            <a th:href="@{/admin/products}">상품 관리</a>
+        </div>
+        <div th:if="${username != null}">
+            <a th:href="@{/products}">상품 보기</a>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+               style="cursor: pointer; text-decoration: none;">Logout</a>
+            <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                <!-- CSRF 보호를 위한 hidden input 추가 -->
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+<!--            <form th:action="@{/logout}" method="post">-->
+<!--                <input type="submit" value="Logout"/>-->
+<!--            </form>-->
+        </div>
+    </nav>
+</div>
+</body>
+</html>
