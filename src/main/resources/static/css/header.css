@@ -9,8 +9,9 @@ header {
     margin: 0;
 }
 
-body{
+body {
     font-family: 'Noto Sans', sans-serif;
+    margin-top: 80px;
 }
 
 nav {
