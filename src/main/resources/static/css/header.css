@@ -17,7 +17,7 @@ body{
 nav {
     display: flex;
     margin-top: 3px;
-    justify-content: center; /* 가로로 중앙 정렬 */
+    justify-content: space-between; /* 가로로 중앙 정렬 */
     align-items: center; /* 세로축 중앙 정렬 */
 }
 
