@@ -3,17 +3,53 @@
 <head>
     <title>상품 보기</title>
     <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/productView.css}" rel="stylesheet">
+    <script>
+        function updatePrice() {
+            const pricePerItem = parseFloat(document.getElementById('productPrice').textContent);
+            const quantity = parseInt(document.getElementById('quantityInput').value);
+            const totalPrice = pricePerItem * quantity;
+            document.getElementById('totalPrice').textContent = totalPrice.toLocaleString();
+        }
+        
+        function updateQuantity() {
+            const quantity = document.getElementById('quantityInput').value;
+            document.getElementById('quantity').value = quantity;
+            updatePrice(); // 가격도 업데이트
+        }
+    </script>
 </head>
 <body>
 <header th:include="/fragments/header :: headerFragment"></header>
     <div class="container">
     	<h1 th:text="${product.name}"></h1>
-	    <p>상품 이름: <span th:text="${product.name}"></span></p>
-	    <p>상품 설명: <span th:text="${product.description}"></span></p>
-	    <p>가격: <span th:text="${product.price}"></span></p>
-	    <p>재고: <span th:text="${product.quantity}"></span></p>
-	    <p>조회수: <span th:text="${product.viewCount}"></span></p>
-	
+	    <div class="product-details">
+	        <p>상품 이름: <span th:text="${product.name}"></span></p>
+	        <p>상품 설명: <span th:text="${product.description}"></span></p>
+	        <p>가격: <span id="productPrice" th:text="${product.price}"></span>원</p>
+	        <p>재고: <span th:text="${product.quantity}"></span></p>
+	        <p>조회수: <span th:text="${product.viewCount}"></span></p>
+	    </div>
+
+        <!-- 결제 기능 시작 -->
+        <div class="purchase-section">
+            <h2>수량 선택 및 결제</h2>
+            <div class="quantity-selector">
+                <button type="button" onclick="document.getElementById('quantityInput').stepDown(); updateQuantity();">-</button>
+                <input id="quantityInput" type="number" min="1" max="100" value="1" onchange="updateQuantity()">
+                <button type="button" onclick="document.getElementById('quantityInput').stepUp(); updateQuantity();">+</button>
+            </div>
+            <div class="purchase-price">
+                총 가격: <span id="totalPrice" th:text="${product.price}"></span>원
+            </div>
+            <form th:action="@{/payments/preview}" method="post">
+            	<input type="hidden" id="productId" name="productId" th:value="${product.id}">
+            	<input type="hidden" id="quantity" name="quantity" value="1">
+                <button type="submit">구매하기</button>
+            </form>
+        </div>
+        <!-- 결제 기능 끝 -->
+
 	    <h2>좋아요</h2>
 	    <div th:if="${isLiked}">
 		    <form th:action="@{/products/{id}/unlike(id=${product.id})}" method="post">

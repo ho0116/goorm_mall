@@ -3,6 +3,7 @@
 <head>
     <title>Goorm Mall</title>
     <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
 <header th:include="/fragments/header :: headerFragment"></header>
@@ -11,6 +12,7 @@
 	<div th:if="${username != null}">
 	    <p>반가워요, <span th:text="${username}"></span>님!</p>
 	</div>
+	<div th:include="product/list :: productFragment"></div>
 </div>
 </body>
 </html>

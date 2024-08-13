@@ -7,11 +7,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.*;
-
-import com.example.goorm_mall.model.*;
-
+import com.example.goorm_mall.model.Member;
+import com.example.goorm_mall.model.Product;
+import com.example.goorm_mall.model.ProductLike;
 import com.example.goorm_mall.service.ProductService;
 
 @Controller
@@ -20,9 +23,9 @@ public class ProductController {
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
-        this.productService = productService;
+    	this.productService = productService;
     }
-
+    
     @GetMapping
     public String listProducts(Model model) {
         List<Product> products = productService.getAllProducts();
@@ -52,5 +55,11 @@ public class ProductController {
         productService.removeLike(id, userDetails.getUsername());
         return "redirect:/products/" + id;
     }
-
+    
+    @GetMapping("/liked")
+    public String likedProducts(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+    	List<Product> likedProducts = productService.getLikedProductsByUsername(userDetails.getUsername());
+    	model.addAttribute("likedProducts", likedProducts);
+    	return "product/liked";
+    }
 }
