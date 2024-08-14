@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 상세</title>
+    <link th:href="@{/css/payView.css}" rel="stylesheet">
+    <script th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<!-- Main Content -->
+<div class="container">
+    <h1>결제 확인</h1>
+    <p>상품 이름: <span th:text="${payment.product.name}"></span></p>
+    <p>수량: <span th:text="${payment.quantity}"></span></p>
+    <p class="price">가격: <span id="totalPrice" th:text="${payment.totalPrice}"></span> 원</p>
+    <p>결제 날짜: <span th:text="${payment.paymentDate}"></span></p>
+    <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p>
+
+    <!-- 배송지 정보 입력 -->
+    <form th:action="@{/payments/complete}" method="post">
+        <input type="hidden" name="paymentId" th:value="${payment.id}">
+
+        <div class="form-group">
+            <label for="recipientName">수령인 이름</label>
+            <input type="text" id="recipientName" name="recipientName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="postalCode">우편번호</label>
+            <div style="display: flex;">
+                <input type="text" id="postalCode" name="postalCode" required readonly
+                       style="flex: 1; margin-right: 5px;">
+                <button type="button" onclick="execDaumPostcode()">우편번호 찾기</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="address">배송지 주소</label>
+            <input type="text" id="address" name="address" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="addressDetail">상세 주소</label>
+            <input type="text" id="addressDetail" name="addressDetail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="additionalInfo">추가 요청 사항</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="2"></textarea>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">결제 완료</button>
+        </div>
+    </form>
+</div>
+
+<!-- 카카오 주소 검색 API 스크립트 -->
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 우편번호와 주소 정보를 해당 필드에 넣습니다.
+                document.getElementById('postalCode').value = data.zonecode;
+                document.getElementById('address').value = data.address;
+
+                // 상세 주소로 포커스를 이동합니다.
+                document.getElementById('addressDetail').focus();
+            }
+        }).open();
+    }
+</script>
+</body>
+</html>

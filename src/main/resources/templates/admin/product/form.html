@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${product.id} ? '상품 수정' : '새 상품 추가'"></title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header th:include="/fragments/header :: headerFragment"></header>
+<div class="container">
+    <form th:action="${product.id} ? @{/admin/products/edit/{id}(id=${product.id})} : @{/admin/products/add}"
+          th:object="${product}" method="post" enctype="multipart/form-data">
+        <h1 th:text="${product.id} ? 'Edit Product' : 'Add New Product'"></h1>
+        <div>
+            <label for="name">상품명</label>
+            <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div>
+            <label for="name">상품이미지</label>
+            <input type="file" id="images" th:field="*{images}" multiple>
+        </div>
+        <div>
+            <label for="description">상품설명</label>
+            <input type="text" id="description" th:field="*{description}" required>
+        </div>
+        <div>
+            <label for="price">가격</label>
+            <input type="number" id="price" th:field="*{price}" required>
+        </div>
+        <div>
+            <label for="quantity">재고</label>
+            <input type="number" id="quantity" th:field="*{quantity}" required>
+        </div>
+        <button type="submit" th:text="${product.id} ? '수정' : '추가'"></button>
+    </form>
+</div>
+</body>
+</html>

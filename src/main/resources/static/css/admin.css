@@ -1,0 +1,162 @@
+@charset "UTF-8";
+/* Reset some default browser styles */
+body, h1, form, div, input, label, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif;
+}
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th, td {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+}
+
+/* Body styling */
+.container {
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 42px);
+}
+
+/*!* Form container *!*/
+form {
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Headline styling */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Label styling */
+label {
+    font-weight: 700;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+/* Input styling */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #777;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+    transition: border-color 0.3s ease;
+}
+
+#rePassword{
+    margin-bottom: 0;
+}
+
+/* Focused input styling */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus {
+    border-color: #999;
+    outline: none;
+}
+
+/* Submit button styling */
+input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for submit button */
+input[type="submit"]:hover {
+    background-color: #333;
+}
+
+/* Link styling */
+form a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Hover effect for link */
+a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+input::placeholder{
+    opacity: .5;
+}
+
+/* Submit button styling */
+.button-group {
+    display: flex;
+    justify-content: space-between; /* 버튼들 사이에 공간을 넣고 싶다면 사용 */
+    gap: 10px;
+}
+
+.button-group button[type="submit"] {
+    display: inline-block;
+    padding: 10px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Submit button styling */
+button{
+    width: 100%;
+    padding: 15px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for submit button */
+button:hover {
+    background-color: #333;
+}
+
+.content{
+    margin: 20px;
+}

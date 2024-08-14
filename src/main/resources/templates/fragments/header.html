@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Header</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div th:fragment="headerFragment">
+    <nav>
+        <div>
+            <a th:href="@{/}">Goorm Mall</a>
+        </div>
+        <div th:if="${username == null}">
+            <a th:href="@{/login}">로그인</a>
+            <a th:href="@{/join}">가입</a>
+        </div>
+        <div>
+            <div>
+                <div class="dropdown">
+                <a th:href="@{/products}">상품 보기 <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                <a th:href="@{/products/liked}">
+                    <div class="icon-text">
+                        <span class="icon">❤️</span>
+                        <span class="text"> 상품</span>
+                    </div></a>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${isAdmin}">
+                <div class="dropdown">
+                <a th:href="@{/admin/products}">상품 관리 <i class="fa fa-caret-down"></i></a>
+                <div class="dropdown-content">
+                    <a th:href="@{/admin/products/add}">상품 추가</a>
+                </div>
+                </div>
+            </div>
+            <div th:if="${username != null}">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                   style="cursor: pointer; text-decoration: none;">Logout</a>
+                <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                    <!-- CSRF 보호를 위한 hidden input 추가 -->
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </div>
+            <!--            <form th:action="@{/logout}" method="post">-->
+            <!--                <input type="submit" value="Logout"/>-->
+            <!--            </form>-->
+        </div>
+    </nav>
+</div>
+</body>
+</html>
