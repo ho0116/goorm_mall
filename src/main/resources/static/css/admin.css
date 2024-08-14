@@ -1,4 +1,16 @@
 @charset "UTF-8";
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 /* Reset some default browser styles */
 body, h1, form, div, input, label, a {
     margin: 0;
@@ -6,6 +18,7 @@ body, h1, form, div, input, label, a {
     box-sizing: border-box;
     font-family: 'Noto Sans', sans-serif;
 }
+
 table {
     margin: 0 auto;
     border-collapse: collapse;
@@ -65,7 +78,17 @@ input[type="password"] {
     transition: border-color 0.3s ease;
 }
 
-#rePassword{
+input[type="file"] {
+    width: 100%;
+    margin-bottom: 20px;
+    border: 0px solid #777;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: transparent;
+    transition: border-color 0.3s ease;
+}
+
+#rePassword {
     margin-bottom: 0;
 }
 
@@ -114,7 +137,7 @@ a:hover {
     text-decoration: none;
 }
 
-input::placeholder{
+input::placeholder {
     opacity: .5;
 }
 
@@ -139,7 +162,7 @@ input::placeholder{
 }
 
 /* Submit button styling */
-button{
+button {
     width: 100%;
     padding: 15px;
     background-color: #000;
@@ -154,9 +177,9 @@ button{
 
 /* Hover effect for submit button */
 button:hover {
-    background-color: #333;
+    background-color: #333 !important;
 }
 
-.content{
+.content {
     margin: 20px;
 }

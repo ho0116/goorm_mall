@@ -7,5 +7,4 @@ import com.example.goorm_mall.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
 }

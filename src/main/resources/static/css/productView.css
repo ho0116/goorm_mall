@@ -27,7 +27,6 @@ body {
 	margin: 0 auto;
 	padding: 20px;
 	background-color: #fcfcfc;
-
 }
 
 h1, h2, h3 {
@@ -145,10 +144,11 @@ textarea {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
-	font-size: 16px;
+	font-size: 15px;
 	margin-bottom: 10px;
 	border-radius: 4px;
 	resize: vertical;
+	box-sizing: border-box;
 }
 
 textarea:focus {
@@ -177,4 +177,41 @@ form button[type="submit"]:hover {
 	font-size: 12px;
 	color: gray;
 	margin: -10px 0;
+}
+
+.material-symbols-outlined.filled {
+	font-variation-settings: 'FILL' 1,
+	'wght' 400,
+	'GRAD' 0,
+	'opsz' 48
+}
+
+.heart {
+	background-color: #fcfcfc !important;
+}
+
+.heart span {
+	color: RGB(255, 69, 58);
+	font-size: 36px;
+}
+.flex {
+	display: flex;
+	justify-content: space-between; /* 좌우 여백을 자동으로 조정 */
+	align-items: center; /* 세로 가운데 정렬 */
+}
+
+.flex .img {
+	width: 50%; /* 이미지 영역을 컨테이너의 50%로 설정 */
+}
+
+.flex .img img {
+	width: 100%; /* 이미지를 영역에 맞게 조정 */
+	height: auto; /* 이미지의 비율을 유지 */
+	object-fit: cover; /* 이미지가 영역을 채우도록 설정 */
+}
+
+.flex .product-details {
+	width: 50%; /* 텍스트 영역을 컨테이너의 50%로 설정 */
+	padding-left: 20px; /* 이미지와 텍스트 사이의 간격 */
+	box-sizing: border-box; /* 패딩을 포함한 크기를 지정 */
 }
