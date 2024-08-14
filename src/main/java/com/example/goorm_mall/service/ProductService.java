@@ -1,15 +1,23 @@
 package com.example.goorm_mall.service;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.goorm_mall.model.*;
-import com.example.goorm_mall.repository.*;
+import com.example.goorm_mall.model.Member;
+import com.example.goorm_mall.model.Product;
+import com.example.goorm_mall.model.ProductComment;
+import com.example.goorm_mall.model.ProductLike;
+import com.example.goorm_mall.repository.MemberRepository;
+import com.example.goorm_mall.repository.ProductCommentRepository;
+import com.example.goorm_mall.repository.ProductLikeRepository;
+import com.example.goorm_mall.repository.ProductRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 

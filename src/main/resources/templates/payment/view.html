@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>주문 상세</title>
     <link th:href="@{/css/payView.css}" rel="stylesheet">
+    <script th:src="@{/js/common.js}"></script>
 </head>
 <body>
 <!-- Main Content -->
@@ -11,7 +12,7 @@
     <h1>결제 확인</h1>
     <p>상품 이름: <span th:text="${payment.product.name}"></span></p>
     <p>수량: <span th:text="${payment.quantity}"></span></p>
-    <p class="price">가격: <span th:text="${payment.totalPrice}"></span>원</p>
+    <p class="price">가격: <span id="totalPrice" th:text="${payment.totalPrice}"></span> 원</p>
     <p>결제 날짜: <span th:text="${payment.paymentDate}"></span></p>
     <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p>
 

@@ -1,8 +1,10 @@
 package com.example.goorm_mall.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +21,8 @@ import com.example.goorm_mall.model.Product;
 import com.example.goorm_mall.model.ProductLike;
 import com.example.goorm_mall.service.ProductService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -31,7 +35,22 @@ public class ProductController {
     @GetMapping
     public String listProducts(Model model) {
         List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
+
+        // 가격을 int로 변환한 새로운 리스트를 생성
+        List<Map<String, Object>> newProducts = new ArrayList<>();
+        for (Product product : products) {
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("id", product.getId());
+            productMap.put("name", product.getName());
+            productMap.put("description", product.getDescription());
+            productMap.put("price", (int) product.getPrice());  // double에서 int로 변환
+            productMap.put("quantity", product.getQuantity());
+            productMap.put("images", product.getImages());
+
+            newProducts.add(productMap);
+        }
+
+        model.addAttribute("products", newProducts);
         
         return "product/list";
     }
@@ -39,11 +58,15 @@ public class ProductController {
     @GetMapping("/{id}")
     public String viewProduct(@PathVariable Long id, Model model, Authentication authentication, HttpSession session) {
         Product product = productService.updateViewCount(id, session);
+        int price =(int) product.getPrice();
         model.addAttribute("product", product);
-        boolean isLiked = product.getLikes().stream().map(ProductLike::getMember)
-                .map(Member::getUsername)
-                .anyMatch((el) -> el.equals(authentication.getName()));
-        model.addAttribute("isLiked", isLiked);
+        model.addAttribute("price", price);
+        if (authentication != null) {        	
+        	boolean isLiked = product.getLikes().stream().map(ProductLike::getMember)
+        			.map(Member::getUsername)
+        			.anyMatch((el) -> el.equals(authentication.getName()));
+        	model.addAttribute("isLiked", isLiked);
+        }
         return "product/view";
     }
 
@@ -62,7 +85,21 @@ public class ProductController {
     @GetMapping("/liked")
     public String likedProducts(Model model, @AuthenticationPrincipal UserDetails userDetails) {
     	List<Product> likedProducts = productService.getLikedProductsByUsername(userDetails.getUsername());
-    	model.addAttribute("likedProducts", likedProducts);
+        // 가격을 int로 변환한 새로운 리스트를 생성
+        List<Map<String, Object>> newProducts = new ArrayList<>();
+        for (Product product : likedProducts) {
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("id", product.getId());
+            productMap.put("name", product.getName());
+            productMap.put("description", product.getDescription());
+            productMap.put("price", (int) product.getPrice());  // double에서 int로 변환
+            productMap.put("quantity", product.getQuantity());
+            productMap.put("images", product.getImages());
+
+            newProducts.add(productMap);
+        }
+    	model.addAttribute("likedProducts", newProducts);
+    	
     	return "product/liked";
     }
     

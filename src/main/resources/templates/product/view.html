@@ -22,6 +22,27 @@
             color: RGB(255, 69, 58);
             font-size: 36px;
         }
+        .flex {
+		    display: flex;
+		    justify-content: space-between; /* 좌우 여백을 자동으로 조정 */
+		    align-items: center; /* 세로 가운데 정렬 */
+		}
+		
+		.flex .img {
+		    width: 50%; /* 이미지 영역을 컨테이너의 50%로 설정 */
+		}
+		
+		.flex .img img {
+		    width: 100%; /* 이미지를 영역에 맞게 조정 */
+		    height: auto; /* 이미지의 비율을 유지 */
+		    object-fit: cover; /* 이미지가 영역을 채우도록 설정 */
+		}
+		
+		.flex .product-details {
+		    width: 50%; /* 텍스트 영역을 컨테이너의 50%로 설정 */
+		    padding-left: 20px; /* 이미지와 텍스트 사이의 간격 */
+		    box-sizing: border-box; /* 패딩을 포함한 크기를 지정 */
+		}
     </style>
     <script>
         function updatePrice() {
@@ -42,16 +63,19 @@
 <header th:include="/fragments/header :: headerFragment"></header>
 <div class="container">
     <h1 th:text="${product.name}"></h1>
-    <div class="product-details">
-        <p>상품 이름: <span th:text="${product.name}"></span></p>
-        <p>상품 설명: <span th:text="${product.description}"></span></p>
-        <div th:each="image : ${product.images}">
-            <p th:text="${image.fileName}"></p>
-        </div>
-        <p th:text="${product.images}"></p>
-        <p>가격: <span id="productPrice" th:text="${product.price}"></span>원</p>
-        <p>재고: <span th:text="${product.quantity}"></span></p>
-        <p>조회수: <span th:text="${product.viewCount}"></span></p>
+    <div class="flex">
+	    <div th:if=${product.images} class="img">    
+	    	<div th:each="image : ${product.images}">
+	            <img th:src="@{${image.filePath}}" th:alt="${image.fileName}" />
+	        </div>
+	    </div>
+	    <div class="product-details">
+	        <p>상품 이름: <span th:text="${product.name}"></span></p>
+	        <p>상품 설명: <span th:text="${product.description}"></span></p>
+	        <p>가격: <span id="productPrice" th:text="${price}"></span>원</p>
+	        <p>재고: <span th:text="${product.quantity}"></span></p>
+	        <p>조회수: <span th:text="${product.viewCount}"></span></p>
+	    </div>
     </div>
 
     <!-- 결제 기능 시작 -->
@@ -65,10 +89,11 @@
                 <input id="quantityInput" type="number" min="1" max="100" value="1" onchange="updateQuantity()">
                 <button type="button" onclick="document.getElementById('quantityInput').stepUp();
                     updateQuantity();">+</button>
+                <div class="purchase-price">
+	                총 가격: <span id="totalPrice" th:text="${price}"></span>원
+	            </div>
             </div>
-            <div class="purchase-price">
-                총 가격: <span id="totalPrice" th:text="${product.price}"></span>원
-            </div>
+            
         </div>
     </div>
     <form th:action="@{/payments/preview}" method="post">
