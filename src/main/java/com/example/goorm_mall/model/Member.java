@@ -34,5 +34,5 @@ public class Member {
     private List<Order> orders;
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Payment> payments;
+    private List<Payment> payments;    
 }
