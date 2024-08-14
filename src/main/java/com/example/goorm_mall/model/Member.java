@@ -29,9 +29,6 @@ public class Member {
     
     @Column(nullable = false, length = 50)
     private String role;
-
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Order> orders;
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Payment> payments;    
