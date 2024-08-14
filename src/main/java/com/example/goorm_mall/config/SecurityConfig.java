@@ -18,7 +18,7 @@ public class SecurityConfig {
                         req -> req
                                 .requestMatchers("/", "/home", "/join").permitAll()
                                 .requestMatchers("/products/**").permitAll()
-                                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**").permitAll()
+                                .requestMatchers("/static/**", "/css/**", "/js/**", "/images/**", "uploads/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

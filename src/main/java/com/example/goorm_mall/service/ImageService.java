@@ -46,7 +46,7 @@ public class ImageService {
                 // 이미지 엔티티 생성 및 상품과 연결
                 Image image = new Image();
                 image.setFileName(fileName);
-                image.setFilePath(targetLocation.toString());
+                image.setFilePath("/uploads/" + fileName);
                 image.setProduct(product);
 
                 imageRepository.save(image);
