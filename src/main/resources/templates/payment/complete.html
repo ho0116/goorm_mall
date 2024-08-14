@@ -16,9 +16,16 @@
             <div style="display: inline-block; text-align: left;">
             <p>상품 이름: <span th:text="${payment.product.name}"></span></p>
             <p>수량: <span th:text="${payment.quantity}"></span></p>
-            <p>총 가격: <span id="totalPrice" th:text="${payment.totalPrice}"></span> 원</p>
-            <p>결제 날짜: <span th:text="${payment.paymentDate}"></span></p>
-            <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p>
+            <p>금액: <span id="totalPrice" th:text="${payment.totalPrice}"></span> 원</p>
+            <p>주문자: <span th:text="${payment.recipientName}"></span></p>
+            <p>배송지:
+            	(<span th:text="${payment.postalCode}"></span>)
+            	<span th:text="${payment.address}"></span>
+            	<span th:text="${payment.addressDetail}"></span>
+            </p>
+            <p>연락처: <span th:text="${payment.phone}"></span></p>
+            <p>결제일: <span th:text="${payment.paymentDate}"></span></p>
+            <!-- <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p> -->
             </div>
         </div>
     </form>

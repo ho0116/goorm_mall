@@ -1,5 +1,7 @@
 package com.example.goorm_mall.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.goorm_mall.model.Member;
@@ -57,4 +59,10 @@ public class PaymentService {
 		
 		return paymentRepository.save(payment);
 	}
+	
+	public List<Payment> getCompletedPaymentsByUsername(String username) {
+		Member member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+        return paymentRepository.findCompletedPaymentsByUsername(member);
+    }
 }
