@@ -3,6 +3,7 @@ package com.example.goorm_mall.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.goorm_mall.model.Member;
 import com.example.goorm_mall.model.Product;
@@ -13,6 +14,7 @@ import com.example.goorm_mall.repository.ProductCommentRepository;
 import com.example.goorm_mall.repository.ProductLikeRepository;
 import com.example.goorm_mall.repository.ProductRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,6 +24,7 @@ public class ProductService {
 	private final MemberRepository memberRepository;
 	private final ProductLikeRepository likeRepository;
 	private final ProductCommentRepository commentRepository;
+	private final ImageService imageService;
 	
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
@@ -31,14 +34,22 @@ public class ProductService {
 		return productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
 	}
 	
-	public Product addProduct(String name, String description, double price, int quantity) {
+	@Transactional
+	public Product addProduct(String name, String description, double price, int quantity, List<MultipartFile> images) {
 		Product product = new Product();
 		product.setName(name);
 		product.setDescription(description);
 		product.setPrice(price);
 		product.setQuantity(quantity);
 		product.setViewCount(0);
-		return productRepository.save(product);
+		
+		Product savedProduct = productRepository.save(product);
+		
+		imageService.storeImages(images, savedProduct);
+		// savedProduct.setImages(imageEntities);
+		
+		return savedProduct;
+		
 	}
 	
 	public Product updateProduct(Long id, String name, String description, double price, int quantity) {
