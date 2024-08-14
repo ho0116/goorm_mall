@@ -1,9 +1,7 @@
 package com.example.goorm_mall.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.goorm_mall.service.MemberService;
 
@@ -20,9 +18,10 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String rePassword) {
+    public String join(@RequestParam String username, @RequestParam String name,
+                       @RequestParam String email, @RequestParam String password, @RequestParam String rePassword) {
         try {
-            memberService.join(username, email, password, rePassword);
+            memberService.join(username, name, email, password, rePassword);
             return "redirect:/login";
         } catch (IllegalStateException e) {
             return "redirect:/join?error";
@@ -33,5 +32,4 @@ public class MemberController {
     public String loginForm() {
         return "login";
     }
-    
 }

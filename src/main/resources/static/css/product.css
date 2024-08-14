@@ -1,98 +1,71 @@
-/* 전체 컨테이너 */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    padding-top: 0;
+}
+
+.content {
     padding: 20px;
 }
 
-/* 상품 리스트 컨테이너 */
-.product-list-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+.trending {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.posts {
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
-    padding: 20px 0;
 }
 
-/* 개별 상품 아이템 */
-.product-item {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+.post-card {
+    flex: 1 1 calc(25% - 40px);
 }
 
-.product-item:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-}
-
-/* 상품 이미지 */
-.product-item img {
-    width: 100%;
-    height: auto;
+.post-card a {
     display: block;
-    transition: transform 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fefefe;
+    border: 0px solid #e5e5e5;
+    border-radius: 5px;
 }
 
-.product-item:hover img {
-    transform: scale(1.05);
+.post-card a:hover {
+    transition: .6s;
+    background: rgba(85, 85, 85, 0.3);
 }
 
-/* 상품 정보 */
-.product-details {
-    padding: 15px;
-    text-align: left;
-}
-
-.product-title {
-    font-size: 18px;
-    font-weight: 700;
+.post-content {
     color: #333333;
-    margin-bottom: 10px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
 }
 
-.product-description {
+.post-content h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.post-content p {
     font-size: 14px;
-    color: #777777;
-    height: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: #666666;
 }
 
-.product-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ff5722;
-    margin-top: 10px;
-}
-
-/* 좋아요 아이콘 */
-.favorite-icon {
-    font-size: 24px;
-    color: #ff5722;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.favorite-icon:hover {
-    color: #e64a19;
-}
-
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .product-list-container {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+@media ( max-width : 1200px) {
+    .post-card {
+        flex: 1 1 calc(33.333% - 40px);
     }
 }
 
-@media (max-width: 480px) {
-    .product-list-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+@media ( max-width : 768px) {
+    .post-card {
+        flex: 1 1 calc(50% - 40px);
+    }
+}
+
+@media ( max-width : 480px) {
+    .post-card {
+        flex: 1 1 calc(100% - 40px);
     }
 }

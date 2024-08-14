@@ -3,32 +3,25 @@
 <head>
     <title>좋아요한 상품</title>
 	<link th:href="@{/css/header.css}" rel="stylesheet">
-	<link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/css/product.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <header th:include="/fragments/header :: headerFragment"></header>
-    <div class="container">
-    	<h1>좋아요한 상품</h1>
-	    <table>
-	        <thead>
-	            <tr>
-	                <th>상품명</th>
-	                <th>상품 설명</th>
-	                <th>가격</th>
-	                <th>좋아요 수</th>
-	                <th>기능</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	            <tr th:each="product : ${likedProducts}">
-	                <td th:text="${product.name}"></td>
-	                <td th:text="${product.description}"></td>
-	                <td th:text="${product.price}"></td>
-	                <td th:text="${totalLikes}"></td>
-	                <td><a th:href="@{/products/{id}(id=${product.id})}">자세히 보기</a></td>
-	            </tr>
-	        </tbody>
-	    </table>
-    </div>
+<div class="trending">
+	<h1>❤️ 상품</h1>
+	<div class="posts">
+		<div class="post-card" th:each="product : ${likedProducts}">
+			<a th:href="@{/products/{id}(id=${product.id})}"
+			   style="text-decoration: none;">
+				<div class="post-content">
+					<h3 th:text="${product.name}"></h3>
+					<p th:text="${product.description}"></p>
+					<p th:text="${product.price}"></p>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>
 </body>
 </html>

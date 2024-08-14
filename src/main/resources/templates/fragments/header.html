@@ -17,7 +17,16 @@
         </div>
         <div>
             <div>
-                <a th:href="@{/products}">상품 보기</a>
+                <div class="dropdown">
+                <a th:href="@{/products}">상품 보기 <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                <a th:href="@{/products/liked}">
+                    <div class="icon-text">
+                        <span class="icon">❤️</span>
+                        <span class="text"> 상품</span>
+                    </div></a>
+                    </div>
+                </div>
             </div>
             <div th:if="${isAdmin}">
                 <div class="dropdown">
