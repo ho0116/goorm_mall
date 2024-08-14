@@ -12,6 +12,7 @@ header {
 body {
     font-family: 'Noto Sans', sans-serif;
     margin-top: 80px;
+    background-color: #f9f9f9;
 }
 
 nav {
@@ -60,4 +61,14 @@ nav form {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.icon-text {
+    display: inline-block;
+    text-align: center; /* 수평 중앙 정렬 */
+}
+
+.icon, .text {
+
+    text-align: center;
 }

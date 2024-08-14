@@ -2,6 +2,7 @@ package com.example.goorm_mall.controller;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,8 +37,8 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public String viewProduct(@PathVariable Long id, Model model, Authentication authentication) {
-        Product product = productService.updateViewCount(id);
+    public String viewProduct(@PathVariable Long id, Model model, Authentication authentication, HttpSession session) {
+        Product product = productService.updateViewCount(id, session);
         model.addAttribute("product", product);
         boolean isLiked = product.getLikes().stream().map(ProductLike::getMember)
                 .map(Member::getUsername)

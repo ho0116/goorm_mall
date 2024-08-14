@@ -1,11 +1,23 @@
 @charset "UTF-8";
 
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
 /* 전반적인 스타일 설정 */
 body {
 	font-family: 'Noto Sans', sans-serif;
 	line-height: 1.6;
 	color: #333;
-	background-color: #f8f8f8;
+	background-color: #f9f9f9;
 	/* margin: 0; */
 	padding: 0;
 }
@@ -14,8 +26,8 @@ body {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 20px;
-	background-color: #fff;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #fcfcfc;
+
 }
 
 h1, h2, h3 {
@@ -43,15 +55,13 @@ p {
 .quantity-selector {
 	display: flex;
 	align-items: center;
-	gap: 10px;
-	margin-top: 20px;
 }
 
 .quantity-selector button {
-	width: 40px;
-	height: 40px;
+	/*width: 40px;*/
+	/*height: 40px;*/
 	border: 1px solid #ccc;
-	background-color: #fff;
+	background-color: #fcfcfc;
 	cursor: pointer;
 	font-size: 18px;
 	color: #555;
@@ -63,10 +73,13 @@ p {
 }
 
 .quantity-selector input {
-	width: 60px;
-	height: 40px;
+	/*width: 60px;*/
+	/*height: 40px;*/
 	text-align: center;
 	border: 1px solid #ccc;
+	background-color: #fcfcfc;
+	border-left: none; /* 왼쪽 선 제거 */
+	border-right: none; /* 오른쪽 선 제거 */
 	font-size: 18px;
 	color: #333;
 }
@@ -78,17 +91,17 @@ p {
 }
 
 .purchase-price {
-	font-size: 1.8em;
+	font-size: large;
 	font-weight: bold;
 	color: #e74c3c;
-	margin: 20px 0;
+	margin: 20px 0 20px 20px;
 }
 
 .purchase-section form button {
 	display: inline-block;
 	padding: 12px 20px;
 	background-color: #333;
-	color: #fff;
+	color: #fcfcfc;
 	font-size: 18px;
 	border: none;
 	cursor: pointer;
@@ -154,4 +167,14 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
 	background-color: #555;
+}
+
+.quantity-wrapper {
+	margin-top: 20px;
+}
+
+.max-purchase-info {
+	font-size: 12px;
+	color: gray;
+	margin: -10px 0;
 }
