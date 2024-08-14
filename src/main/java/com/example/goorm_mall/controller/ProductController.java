@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.goorm_mall.model.Member;
 import com.example.goorm_mall.model.Product;
@@ -30,6 +31,7 @@ public class ProductController {
     public String listProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
+        
         return "product/list";
     }
 
@@ -61,5 +63,12 @@ public class ProductController {
     	List<Product> likedProducts = productService.getLikedProductsByUsername(userDetails.getUsername());
     	model.addAttribute("likedProducts", likedProducts);
     	return "product/liked";
+    }
+    
+    @PostMapping("/{id}/comment")
+    public String addComment(@PathVariable Long id, @RequestParam String content,
+                             @AuthenticationPrincipal UserDetails userDetails) {
+        productService.addComment(id, userDetails.getUsername(), content);
+        return "redirect:/products/" + id;
     }
 }

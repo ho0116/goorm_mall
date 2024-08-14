@@ -43,6 +43,10 @@
 	    <div class="product-details">
 	        <p>상품 이름: <span th:text="${product.name}"></span></p>
 	        <p>상품 설명: <span th:text="${product.description}"></span></p>
+	        <div th:each="image : ${product.images}">
+				<p th:text="${image.fileName}"></p>
+			</div>
+			<p th:text="${product.images}"></p>
 	        <p>가격: <span id="productPrice" th:text="${product.price}"></span>원</p>
 	        <p>재고: <span th:text="${product.quantity}"></span></p>
 	        <p>조회수: <span th:text="${product.viewCount}"></span></p>

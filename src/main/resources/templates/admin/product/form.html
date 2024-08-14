@@ -10,11 +10,15 @@
 <header th:include="/fragments/header :: headerFragment"></header>
 <div class="container">
     <form th:action="${product.id} ? @{/admin/products/edit/{id}(id=${product.id})} : @{/admin/products/add}"
-          th:object="${product}" method="post">
+          th:object="${product}" method="post" enctype="multipart/form-data">
         <h1 th:text="${product.id} ? 'Edit Product' : 'Add New Product'"></h1>
         <div>
             <label for="name">상품명</label>
             <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div>
+            <label for="name">상품이미지</label>
+            <input type="file" id="images" th:field="*{images}" multiple>
         </div>
         <div>
             <label for="description">상품설명</label>
