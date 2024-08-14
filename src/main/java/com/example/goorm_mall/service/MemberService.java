@@ -19,7 +19,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void join(String username, String email, String password, String rePassword) {
+    public void join(String username, String name, String email, String password, String rePassword) {
         if (memberRepository.existsByUsername(username)) {
             System.out.println("이미 존재하는 회원입니다.");
             throw new IllegalStateException("이미 존재하는 회원입니다.");
@@ -30,6 +30,7 @@ public class MemberService {
         }
         Member member = new Member();
         member.setUsername(username);
+        member.setName(name);
         member.setEmail(email);
         member.setPassword(passwordEncoder.encode(password));
         member.setRole("ROLE_USER");

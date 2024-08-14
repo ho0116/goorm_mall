@@ -2,13 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>결제 확인</title>
+    <link th:href="@{/css/header.css}" rel="stylesheet">
+    <link th:href="@{/css/admin.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>결제 확인</h1>
-    <p>상품 이름: <span th:text="${payment.product.name}"></span></p>
-    <p>수량: <span th:text="${payment.quantity}"></span></p>
-    <p>총 가격: <span th:text="${payment.totalPrice}"></span>원</p>
-    <p>결제 날짜: <span th:text="${payment.paymentDate}"></span></p>
-    <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p>
+<header th:include="/fragments/header :: headerFragment"></header>
+<div class="container">
+    <form style="background-color: #fcfcfc;">
+        <h1>결제 확인</h1>
+        <div style="text-align: center;">
+            <div style="display: inline-block; text-align: left;">
+            <p>상품 이름: <span th:text="${payment.product.name}"></span></p>
+            <p>수량: <span th:text="${payment.quantity}"></span></p>
+            <p>총 가격: <span th:text="${payment.totalPrice}"></span>원</p>
+            <p>결제 날짜: <span th:text="${payment.paymentDate}"></span></p>
+            <p>결제 상태: <span th:text="${payment.paymentStatus}"></span></p>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>

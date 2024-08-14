@@ -1,0 +1,119 @@
+body{
+    background-color: #f9f9f9;
+    font-family: 'Noto Sans', sans-serif;
+}
+label {
+    font-weight: 700;
+    color: #666;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+/* 기본 레이아웃 설정 */
+.container {
+    width: 100%;
+    max-width: 800px; /* 넓이를 조금 더 넓게 설정하여 컨텐츠를 보여줍니다 */
+    background-color: #fcfcfc;
+    padding: 20px;
+    margin: 20px auto; /* 상하에 일정한 여백을 추가해 컨테이너를 중앙에 배치 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: large;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-container button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+}
+
+.button-container button:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
+
+.button-container button:active {
+    background-color: #222;
+    transform: translateY(0);
+}
+
+button {
+    outline: none;
+}
+
+button[type="button"] {
+    padding: 8px;
+    font-size: 0.9em;
+    background-color: #8E8E8E;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+    background-color: #6A6A6A;
+}
+
+button[type="button"]:active {
+    background-color: #474747;
+}

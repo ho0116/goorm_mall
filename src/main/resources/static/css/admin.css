@@ -37,6 +37,8 @@ h1 {
     text-align: center;
     color: #333;
     margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 700;
 }
 
 /* Label styling */
@@ -153,4 +155,8 @@ button{
 /* Hover effect for submit button */
 button:hover {
     background-color: #333;
+}
+
+.content{
+    margin: 20px;
 }
