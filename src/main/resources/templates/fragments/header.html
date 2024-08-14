@@ -16,19 +16,6 @@
             <a th:href="@{/login}">로그인</a>
             <a th:href="@{/join}">가입</a>
         </div>
-<!--            <div>-->
-<!--                <div class="dropdown">-->
-<!--                    <a th:href="@{/info}">마이 페이지<i class="fa fa-caret-down"></i></a>-->
-<!--                    <div class="dropdown-content">-->
-<!--                        <a th:href="@{/products/liked}">-->
-<!--                            <div class="icon-text">-->
-<!--                                <span class="icon">❤️</span>-->
-<!--                                <span class="text"> 상품</span>-->
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <div th:if="${isAdmin}">
                 <div class="dropdown">
                     <a th:href="@{/admin/products}">상품 관리 <i class="fa fa-caret-down"></i></a>
@@ -39,7 +26,7 @@
             </div>
             <div th:if="${username != null}">
                 <div class="dropdown">
-                    <a th:href="@{/info}">마이 페이지<i class="fa fa-caret-down"></i></a>
+                    <a th:href="@{/info}">My Page<i class="fa fa-caret-down"></i></a>
                     <div class="dropdown-content">
                         <a th:href="@{/products/liked}">
                             <div class="icon-text">
